@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class AddressBookMain {
     public static int lastRecord=-1;
     public static String takeInput() {
-        System.out.println("Enter the First Name of the Contact you want to Edit: ");
+        System.out.println("Enter the First Name of the Contact you want to Edit/Delete: ");
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }
@@ -19,6 +19,8 @@ public class AddressBookMain {
             System.out.println("**********************************ADDRESS BOOK MENU:**********************************");
             System.out.println("=>Do you want to ADD a new Contact to the Address Book? PRESS 1");
             System.out.println("=>Do you want to EDIT an Existing Contact? PRESS 2");
+            System.out.println("=>Do you want to DELETE a Contact? PRESS 3");
+            System.out.println("=>To EXIT.....PRESS 4");
             int input = in.nextInt();
 
             switch (input) {
@@ -33,8 +35,7 @@ public class AddressBookMain {
                 case 2:
                     if (lastRecord >= 0) {
                         String name = takeInput();
-                        System.out.println(name);
-                        for (int j = 0; j < lastRecord; j++) {
+                        for (int j = 0; j <=lastRecord; j++) {
                             if (name.equals(contact[j].firstName)) {
                                 contact[j].DisplayContact();
                                 System.out.println("Enter the following details to edit the Contact in the Address Book:");
@@ -42,9 +43,34 @@ public class AddressBookMain {
                                 System.out.println("!!!CONTACT EDITED!!!");
                                 contact[j].DisplayContact();
                             }
+                            else
+                                System.out.println("The given name is NOT FOUND!!!");
                         }
-
                     }
+                    else
+                        System.out.println("Address Book is EMPTY!!!");
+                    break;
+
+                case 3:
+                    if(lastRecord >= 0) {
+                        String name = takeInput();
+                        for (int j = 0; j <= lastRecord; j++) {
+                            if (name.equals(contact[j].firstName)) {
+                                contact[j].DeleteContact();
+                                System.out.println("!!!CONTACT DELETED!!!");
+                            } else
+                                System.out.println("The given name is NOT FOUND!!!");
+                        }
+                    }
+                    else
+                        System.out.println("Address Book is EMPTY!!!");
+
+                    break;
+
+                default:
+                    System.out.println("EXITING ADDRESS BOOK.....");
+                    i=contact.length;
+                    break;
             }
         }
     }
@@ -72,6 +98,9 @@ public class AddressBookMain {
             email = in.nextLine();
         }
 
+        public void DeleteContact(){
+            firstName=lastName=address=city=state=zipCode=phoneNumber=email=null;
+        }
         public void DisplayContact() {
             System.out.println("____________________________________________________");
             System.out.println("The Contact Details:");
