@@ -13,18 +13,21 @@ public class AddressBookMain {
         System.out.println("Welcome to Address Book Program");
         Contact[] contact = new Contact[100];
         Scanner in = new Scanner(System.in);
+        String[] Dictionary= new String[100];
+        int addBookNo=0;
 
 
         for (int i = 0; i < contact.length; i++) {
             System.out.println("**********************************ADDRESS BOOK MENU:**********************************");
-            System.out.println("=>Do you want to ADD a new Contact to the Address Book? PRESS 1");
-            System.out.println("=>Do you want to EDIT an Existing Contact? PRESS 2");
-            System.out.println("=>Do you want to DELETE a Contact? PRESS 3");
-            System.out.println("=>To EXIT.....PRESS 4");
+            System.out.println("=>To OPEN a new Address Book: PRESS 1");
+            System.out.println("=>Do you want to ADD a new Contact to the Address Book? PRESS 2");
+            System.out.println("=>Do you want to EDIT an Existing Contact? PRESS 3");
+            System.out.println("=>Do you want to DELETE a Contact? PRESS 4");
+            System.out.println("=>Do you want to EXIT this Address Book.....PRESS 5");
             int input = in.nextInt();
 
             switch (input) {
-                case 1:
+                case 2:
                     System.out.println("Enter the following details to add the Contact to the Address Book:");
                     contact[i] = new Contact();
                     System.out.println("!!!CONTACT ADDED!!!");
@@ -32,7 +35,7 @@ public class AddressBookMain {
                     lastRecord++;
                     break;
 
-                case 2:
+                case 3:
                     if (lastRecord >= 0) {
                         String name = takeInput();
                         for (int j = 0; j <=lastRecord; j++) {
@@ -51,7 +54,7 @@ public class AddressBookMain {
                         System.out.println("Address Book is EMPTY!!!");
                     break;
 
-                case 3:
+                case 4:
                     if(lastRecord >= 0) {
                         String name = takeInput();
                         for (int j = 0; j <= lastRecord; j++) {
@@ -67,9 +70,18 @@ public class AddressBookMain {
 
                     break;
 
-                default:
+                case 5:
                     System.out.println("EXITING ADDRESS BOOK.....");
                     i=contact.length;
+                    break;
+
+                default:
+                    System.out.println("Enter the name of the Address Book:");
+                    Dictionary[addBookNo]= in.next();
+                    System.out.println("NEW ADDRESS BOOK: "+Dictionary[addBookNo]);
+                    System.out.println("-----------------------------------------------------");
+                    addBookNo++;
+                    i=0;
                     break;
             }
         }
